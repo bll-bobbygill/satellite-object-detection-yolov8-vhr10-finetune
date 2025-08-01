@@ -24,16 +24,21 @@ def main():
     print("Starting YOLOv8 fine-tuning on VHR-10 dataset...")
     print(f"GPU available: {torch.cuda.is_available()}")
     
+    # Clear GPU cache to start fresh
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+        print(f"GPU memory cleared. Available memory: {torch.cuda.get_device_properties(0).total_memory / 1024**3:.1f} GB")
+    
     # Initialize trainer
     trainer = YOLOv8Trainer(model_size="n", pretrained=True)
     trainer.load_model()
     
-    # Training parameters - reduced epochs for faster completion
+    # Training parameters - optimized for memory
     training_params = {
         "data_yaml": data_yaml,
         "epochs": 50,  # Reduced from 100 for faster completion
         "imgsz": 640,
-        "batch_size": 16,
+        "batch_size": 8,  # Reduced from 16 to save GPU memory
         "lr0": 0.01,
         "weight_decay": 0.0005,
         "momentum": 0.937,
@@ -42,10 +47,11 @@ def main():
         "save_period": 10,
         "patience": 25,  # Reduced patience
         "device": "0" if torch.cuda.is_available() else "cpu",
-        "workers": 8,
+        "workers": 4,  # Reduced workers to save memory
         "cos_lr": True,
         "close_mosaic": 10,
         "cache": False,  # Disable caching to save memory
+        "amp": True,  # Enable automatic mixed precision to save memory
     }
     
     # Start training

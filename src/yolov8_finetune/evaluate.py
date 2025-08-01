@@ -299,7 +299,7 @@ class YOLOv8Evaluator:
 def main():
     """Main evaluation function."""
     # Configuration
-    model_path = "results/vhr10_yolov8n/weights/best.pt"
+    model_path = "results/vhr10_yolov8n_quick/weights/best.pt"
     data_yaml = "data/yolo_dataset/dataset.yaml"
     
     # Check if model exists
