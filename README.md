@@ -38,7 +38,32 @@ Images are sourced from Google Earth and Vaihingen dataset with manual expert an
 
 ## Setup and Installation
 
-### Using Poetry (Recommended)
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/bll-bobbygill/yolov8-vhr10-finetune.git
+cd yolov8-vhr10-finetune
+```
+
+### 2. Setup Dataset
+
+**Important**: The dataset images are not included in the repository (excluded via .gitignore). You need to obtain the VHR-10 dataset:
+
+```bash
+# Copy the archive to your machine (adjust paths as needed)
+# Option A: If you have the original archive
+unar "NWPU VHR-10 dataset.rar"
+mv "NWPU VHR-10 dataset" data/VHR-10
+
+# Option B: Copy from another machine
+scp user@machine:~/Downloads/NWPU\ VHR-10\ dataset.rar ./
+unar "NWPU VHR-10 dataset.rar"
+mv "NWPU VHR-10 dataset" data/VHR-10
+```
+
+### 3. Install Dependencies
+
+#### Using Poetry (Recommended)
 
 ```bash
 # Install dependencies
@@ -48,7 +73,7 @@ poetry install
 poetry shell
 ```
 
-### Using pip
+#### Using pip
 
 ```bash
 # Install dependencies
