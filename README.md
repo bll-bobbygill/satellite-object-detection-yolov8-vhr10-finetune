@@ -10,6 +10,38 @@ This repository serves as a proof-of-concept to assess whether YOLOv8 can effect
 - Infrastructure and equipment inventory management
 - Automated lead generation based on equipment detection
 
+## 🤗 Pre-trained Model
+
+The trained model is available on HuggingFace Hub for immediate use:
+
+**Model Repository:** https://huggingface.co/bluelabel/satellite-equipment-detection-yolov8n-vhr10
+
+### Quick Start with Pre-trained Model
+
+```python
+from huggingface_hub import hf_hub_download
+from ultralytics import YOLO
+
+# Download the trained model
+model_path = hf_hub_download(
+    repo_id="bluelabel/satellite-equipment-detection-yolov8n-vhr10",
+    filename="best.pt"
+)
+
+# Load and use the model
+model = YOLO(model_path)
+results = model('your_satellite_image.jpg')
+
+# Process results
+for result in results:
+    boxes = result.boxes
+    if boxes is not None:
+        for box in boxes:
+            class_id = int(box.cls)
+            confidence = float(box.conf)
+            print(f"Detected: {model.names[class_id]} (confidence: {confidence:.3f})")
+```
+
 ## Dataset
 
 The VHR-10 dataset contains 800 very high-resolution remote sensing images:
