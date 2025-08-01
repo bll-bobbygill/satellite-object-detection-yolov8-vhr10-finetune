@@ -1,0 +1,33 @@
+# Configuration for Cog https://github.com/replicate/cog
+# This defines the environment your code will run in on Replicate
+
+build:
+  # Set to true if your model requires a GPU
+  gpu: true
+  
+  # A list of ubuntu apt packages to install
+  system_packages:
+    - "libgl1-mesa-glx"
+    - "libglib2.0-0"
+    - "libsm6"
+    - "libxext6"
+    - "libxrender-dev"
+    - "libgomp1"
+    - "libglib2.0-0"
+    - "libglib2.0-dev"
+
+  # Python version in the form '3.11' or '3.11.4'
+  python_version: "3.11"
+
+  # A list of packages in the format <package-name>==<version>
+  python_packages:
+    - "torch==2.1.0"
+    - "torchvision==0.16.0"
+    - "ultralytics==8.3.0"
+    - "pillow==10.4.0"
+    - "numpy==1.26.4"
+    - "opencv-python==4.10.0.84"
+    - "huggingface_hub==0.20.0"
+
+# predict.py defines how predictions are run on your model
+predict: "predict.py:Predictor"
